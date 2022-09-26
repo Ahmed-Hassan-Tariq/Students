@@ -1,0 +1,76 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class Plot{
+    -owner: Owner
+    -address: Address
+    -dimensions: Dimensions
+    -demandPrice: int
+    --
+    ..
+    <<constructor>>Plot(owner: Owner,
+    address: Address, dimensions: Dimensions)
+    ..
+    +getPlotInfo(): String
+}
+
+class Owner{
+    -firstName: String
+    -lastName: String
+    -contact: int
+    -gender: string
+    -contactNumber: String
+    --
+    ..
+    <<constructor>>Owner(firstName: String, lastName: String,
+     contact: String, int age, String gender)
+    ..
+    +getOwnerInfo(): String
+}
+
+class Address{
+    -province: String
+    -city: String
+    -society: String
+    -block: char
+    -plotNumber: int
+    -geoLocation: GeoLocation
+    --
+    ..
+    <<constructor>>Address(String province, String city,
+    String society, char block, int plotNumber,
+    GeoLocation geoLocation)
+    ..
+    +getFullAddress(): String
+}
+
+class GeoLocation{
+    -longitude: float;
+    -latitude: float;
+    --
+    ..
+    <<constructor>>GeoLocation(float longitude,
+     float latitude)
+    ..
+}
+
+class Dimensions{
+    -length: double
+    -width: double
+    -area: double
+    -shape: String
+    --
+    ..
+    <<constructor>>Dimensions(double length,
+     double width)
+    ..
+    +getDimensions(): String
+}
+
+Plot "1..*" o-up- "1" Owner
+Plot "1..*" o-right- "1" Dimensions
+Address +-- GeoLocation
+Plot "1" o-left- "1" Address
+
+@enduml
